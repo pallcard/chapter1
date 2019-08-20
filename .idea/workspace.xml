@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../learn" value="PREVIEW" />
+        <entry key="$USER_HOME$/Downloads/cinema_api_server-master-1e89fe3f70be8b7da49a08244dc1eeeb27a4bbc0cinema_api_server.git" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="787" />
+    <option name="y" value="332" />
+    <option name="width" value="1753" />
+    <option name="height" value="1037" />
+  </component>
+</project>
