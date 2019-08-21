@@ -1,10 +1,12 @@
 package cn.wishhust.chapter1.service;
 
+import cn.wishhust.chapter1.helper.DatabaseHelper;
 import cn.wishhust.chapter1.model.Customer;
 import cn.wishhust.chapter1.util.PropsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class CustomerService {
         List<Customer> customerList = new ArrayList<>();
         String sql = "select * from customer";
         try {
-            conn = DriverManager.getConnection(URI,USERNAME,PASSWORD);
+            conn = DatabaseHelper.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
@@ -65,13 +67,7 @@ public class CustomerService {
         } catch (SQLException e) {
             LOGGER.error("execute sql failure", e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    LOGGER.error("close connection failure", e);
-                }
-            }
+            DatabaseHelper.closeConnection(conn);
         }
 
         // TODO: 2019-08-21

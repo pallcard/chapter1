@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e124398a-d5e1-410d-99d5-14f0c1715419" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/service/CustomerService.java" afterDir="false" />
-    </list>
+    <list default="true" id="e124398a-d5e1-410d-99d5-14f0c1715419" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,15 +16,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/util/PropsUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -42,11 +29,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/service/CustomerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="71" column="62" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
+            <state relative-caret-position="529">
+              <caret line="74" column="9" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="74" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/helper/DatabaseHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -167,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/util/CastUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/util/PropsUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/service/CustomerService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/helper/DatabaseHelper.java" />
       </list>
     </option>
   </component>
@@ -192,8 +192,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="955" />
-    <option name="y" value="267" />
+    <option name="x" value="703" />
+    <option name="y" value="485" />
     <option name="width" value="1753" />
     <option name="height" value="1037" />
   </component>
@@ -243,7 +243,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="cn.wishhust.chapter1" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="chapter1" type="b2602c69:ProjectViewProjectNode" />
@@ -253,7 +253,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="cn.wishhust.chapter1" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="CustomerService" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="chapter1" type="b2602c69:ProjectViewProjectNode" />
@@ -395,7 +394,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="955" y="267" width="1753" height="1037" extended-state="0" />
+    <frame x="703" y="485" width="1753" height="1037" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25248393" />
@@ -416,7 +415,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.23386243" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.27195767" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Console" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -638,8 +637,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/service/CustomerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="71" column="62" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
+        <state relative-caret-position="529">
+          <caret line="74" column="9" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="74" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn.wishhust.chapter1/helper/DatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
