@@ -43,7 +43,7 @@ public final class PropsUtil {
         return getString(props, key, "");
     }
 
-    private static String getString(Properties props, String key, String defaultValue) {
+    public static String getString(Properties props, String key, String defaultValue) {
         String value = defaultValue;
         if (props.contains(key)) {
             value = props.getProperty(key);
@@ -51,11 +51,11 @@ public final class PropsUtil {
         return value;
     }
 
-    private static int getInt(Properties props, String key) {
+    public static int getInt(Properties props, String key) {
         return getInt(props,key,0);
     }
 
-    private static int getInt(Properties props, String key, int defaultValue) {
+    public static int getInt(Properties props, String key, int defaultValue) {
         int value = defaultValue;
         if (props.contains(key)) {
             value = CastUtil.castInt(props.getProperty(key));
@@ -63,11 +63,11 @@ public final class PropsUtil {
         return value;
     }
 
-    private static boolean getBoolean(Properties props, String key) {
+    public static boolean getBoolean(Properties props, String key) {
         return getBoolean(props,key,false);
     }
 
-    private static boolean getBoolean(Properties props, String key, boolean defaultValue) {
+    public static boolean getBoolean(Properties props, String key, boolean defaultValue) {
         boolean value = defaultValue;
         if (props.contains(key)) {
             value = CastUtil.castBoolean(props.getProperty(key));
