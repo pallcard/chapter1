@@ -47,31 +47,33 @@ public class CustomerService {
      */
     public List<Customer> getCustomerList() {
         Connection conn = null;
-        List<Customer> customerList = new ArrayList<>();
+//        List<Customer> customerList = new ArrayList<>();
         String sql = "select * from customer";
-        try {
-            conn = DatabaseHelper.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()) {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getLong("id"));
-                customer.setName(resultSet.getString("name"));
-                customer.setContact(resultSet.getString("contact"));
-                customer.setTelephone(resultSet.getString("telephone"));
-                customer.setTelephone(resultSet.getString("email"));
-                customer.setTelephone(resultSet.getString("remark"));
-                customerList.add(customer);
-            }
-            return customerList;
-        } catch (SQLException e) {
-            LOGGER.error("execute sql failure", e);
-        } finally {
-            DatabaseHelper.closeConnection(conn);
-        }
+//        try {
+//            conn = DatabaseHelper.getConnection();
+//            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while(resultSet.next()) {
+//                Customer customer = new Customer();
+//                customer.setId(resultSet.getLong("id"));
+//                customer.setName(resultSet.getString("name"));
+//                customer.setContact(resultSet.getString("contact"));
+//                customer.setTelephone(resultSet.getString("telephone"));
+//                customer.setTelephone(resultSet.getString("email"));
+//                customer.setTelephone(resultSet.getString("remark"));
+//                customerList.add(customer);
+//            }
+//            return customerList;
+//            return DatabaseHelper.queryEntityList(Customer.class, conn, sql);
+        return DatabaseHelper.queryEntityList(Customer.class, sql);
+//        }
+//        catch (SQLException e) {
+//            LOGGER.error("execute sql failure", e);
+//        }
+//        finally {
+//            DatabaseHelper.closeConnection(conn);
+//        }
 
-        // TODO: 2019-08-21
-        return null;
     }
 
     /**
