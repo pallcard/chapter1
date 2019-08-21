@@ -3,6 +3,7 @@ package cn.wishhust.chapter1.helper;
 import cn.wishhust.chapter1.model.Customer;
 import cn.wishhust.chapter1.util.CollectionUtil;
 import cn.wishhust.chapter1.util.PropsUtil;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -10,6 +11,10 @@ import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,26 +25,37 @@ public class DatabaseHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
 
     private static final String DRIVER;
-    private static final String URI;
+    private static final String URL;
     private static final String USERNAME;
     private static final String PASSWORD;
 
-    private static final QueryRunner QUERY_RUNNER = new QueryRunner();
+    private static final QueryRunner QUERY_RUNNER;
 
     //保证一个线程只有一个Connection，使用ThreadLocal来存放本地线程变量
-    private static final ThreadLocal<Connection> CONNECTION_HOLDER = new ThreadLocal<>();
+    private static final ThreadLocal<Connection> CONNECTION_HOLDER;
+
+    private static final BasicDataSource DATA_SOURCE;
 
     static {
+        CONNECTION_HOLDER = new ThreadLocal<>();
+        QUERY_RUNNER = new QueryRunner();
         Properties conf = PropsUtil.loadProps("config.properties");
         DRIVER = conf.getProperty("jdbc.driver");
-        URI = conf.getProperty("jdbc.url");
+        URL = conf.getProperty("jdbc.url");
         USERNAME = conf.getProperty("jdbc.username");
         PASSWORD = conf.getProperty("jdbc.password");
-        try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("can not load jdbc driver", e);
-        }
+
+        DATA_SOURCE = new BasicDataSource();
+        DATA_SOURCE.setDriverClassName(DRIVER);
+        DATA_SOURCE.setUrl(URL);
+        DATA_SOURCE.setUsername(USERNAME);
+        DATA_SOURCE.setPassword(PASSWORD);
+
+//        try {
+//            Class.forName(DRIVER);
+//        } catch (ClassNotFoundException e) {
+//            LOGGER.error("can not load jdbc driver", e);
+//        }
     }
 
     /**
@@ -50,7 +66,8 @@ public class DatabaseHelper {
         Connection conn = CONNECTION_HOLDER.get();
         if (conn == null) {
             try {
-                conn = DriverManager.getConnection(URI,USERNAME,PASSWORD);
+//                conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+                conn = DATA_SOURCE.getConnection();
             } catch (SQLException e) {
                 LOGGER.error("get connection failure", e);
             } finally {
@@ -60,9 +77,9 @@ public class DatabaseHelper {
         return conn;
     }
 
-    /**
-     * 关闭连接
-     */
+//    /**
+//     * 关闭连接
+//     */
 //    public static void closeConnection(Connection conn) {
 //        if (conn != null) {
 //            try {
@@ -72,19 +89,19 @@ public class DatabaseHelper {
 //            }
 //        }
 //    }
-    public static void closeConnection() {
-        Connection conn = CONNECTION_HOLDER.get();
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                LOGGER.error("close connection failure", e);
-                throw new RuntimeException(e);
-            } finally {
-                CONNECTION_HOLDER.remove();
-            }
-        }
-    }
+//    public static void closeConnection() {
+//        Connection conn = CONNECTION_HOLDER.get();
+//        if (conn != null) {
+//            try {
+//                conn.close();
+//            } catch (SQLException e) {
+//                LOGGER.error("close connection failure", e);
+//                throw new RuntimeException(e);
+//            } finally {
+//                CONNECTION_HOLDER.remove();
+//            }
+//        }
+//    }
 
 
     /**
@@ -104,9 +121,10 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             LOGGER.error("query entity list failure", e);
             throw new RuntimeException(e);
-        } finally {
-            closeConnection();
         }
+//        finally {
+//            closeConnection();
+//        }
 
         return entityList;
     }
@@ -127,9 +145,10 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             LOGGER.error("query entity failure", e);
             throw new RuntimeException(e);
-        } finally {
-            closeConnection();
         }
+//        finally {
+//            closeConnection();
+//        }
         return entiry;
     }
 
@@ -159,9 +178,10 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             LOGGER.error("execute update failure", e);
             throw new RuntimeException(e);
-        } finally {
-            closeConnection();
         }
+//        finally {
+//            closeConnection();
+//        }
         return rows;
     }
 
@@ -239,5 +259,19 @@ public class DatabaseHelper {
         return entityClass.getSimpleName();
     }
 
+    public static void executeSqlFile(String filePath) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(filePath);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String sql;
+        try {
+            while((sql = bufferedReader.readLine()) != null) {
+                executeUpdate(sql);
+            }
+        } catch (Exception e) {
+            LOGGER.error("execute sql file failure", e);
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

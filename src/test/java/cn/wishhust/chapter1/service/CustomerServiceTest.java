@@ -1,10 +1,15 @@
 package cn.wishhust.chapter1.service;
 
+import cn.wishhust.chapter1.helper.DatabaseHelper;
 import cn.wishhust.chapter1.model.Customer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +26,8 @@ public class CustomerServiceTest {
     }
 
     @Before
-    public void init() {
-        // TODO: 2019-08-21 初始化数据库
+    public void init() throws IOException {
+        DatabaseHelper.executeSqlFile("sql/customer_init.sql");
     }
 
     @Test
