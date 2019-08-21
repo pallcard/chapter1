@@ -1,9 +1,16 @@
 package cn.wishhust.chapter1.service;
 
 import cn.wishhust.chapter1.model.Customer;
+import cn.wishhust.chapter1.util.PropsUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+
 
 /**
  *
@@ -12,11 +19,61 @@ import java.util.Map;
 
 public class CustomerService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
+
+    private static final String DRIVER;
+    private static final String URI;
+    private static final String USERNAME;
+    private static final String PASSWORD;
+
+    static {
+        Properties conf = PropsUtil.loadProps("config.properties");
+        DRIVER = conf.getProperty("jdbc.driver");
+        URI = conf.getProperty("jdbc.url");
+        USERNAME = conf.getProperty("jdbc.username");
+        PASSWORD = conf.getProperty("jdbc.password");
+        try {
+            Class.forName(DRIVER);
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("can not load jdbc driver", e);
+        }
+    }
+
     /**
      * 获取客户列表
      * @return
      */
     public List<Customer> getCustomerList() {
+        Connection conn = null;
+        List<Customer> customerList = new ArrayList<>();
+        String sql = "select * from customer";
+        try {
+            conn = DriverManager.getConnection(URI,USERNAME,PASSWORD);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                Customer customer = new Customer();
+                customer.setId(resultSet.getLong("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setContact(resultSet.getString("contact"));
+                customer.setTelephone(resultSet.getString("telephone"));
+                customer.setTelephone(resultSet.getString("email"));
+                customer.setTelephone(resultSet.getString("remark"));
+                customerList.add(customer);
+            }
+            return customerList;
+        } catch (SQLException e) {
+            LOGGER.error("execute sql failure", e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    LOGGER.error("close connection failure", e);
+                }
+            }
+        }
+
         // TODO: 2019-08-21
         return null;
     }
